@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch("http://localhost:5000/api/restaurants");
+      const res = await fetch("https://restaurant-backend-xp1e.onrender.com/api/restaurants");
       const data = await res.json();
       const response = data?.data?.cards?.slice(3);
       setRestaurants(response);
