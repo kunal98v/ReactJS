@@ -10,7 +10,9 @@ function App() {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch("https://restaurant-backend-xp1e.onrender.com/api/restaurants");
+      const res = await fetch(
+        "https://restaurant-backend-xp1e.onrender.com/api/restaurants"
+      );
       const data = await res.json();
       const response = data?.data?.cards?.slice(3);
       setRestaurants(response);
@@ -20,18 +22,24 @@ function App() {
     fetchApi();
   }, []);
 
-    function highRatedRestaurants() {
-      let filterData = restaurants.filter((item) => {
-        return item?.card?.card?.info.avgRating > 4.5;
-      });
-      setFilterRestaurants(filterData);
-    }
+  function highRatedRestaurants() {
+    let filterData = restaurants.filter((item) => {
+      return item?.card?.card?.info.avgRating > 4.5;
+    });
+    setFilterRestaurants(filterData);
+  }
 
   function searchRestaurants() {
     let searchRestaurants = restaurants.filter((item) => {
-      return item?.card?.card?.info.name.includes(input);
+      return item?.card?.card?.info.name
+        .toLowerCase()
+        .includes(input.toLowerCase());
     });
     setFilterRestaurants(searchRestaurants);
+  }
+
+  function reset() {
+    setFilterRestaurants(restaurants);
   }
 
   return restaurants.length === 0 ? (
@@ -39,13 +47,8 @@ function App() {
   ) : (
     <>
       <Header />
-      <button
-        onClick={() => {
-          highRatedRestaurants();
-        }}
-      >
-        High Rated Restaurants
-      </button>
+      <button onClick={highRatedRestaurants}>High Rated Restaurants</button>
+      <button onClick={reset}>Reset</button>
       <input
         type="text"
         onChange={(e) => {
