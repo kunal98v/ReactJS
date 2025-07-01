@@ -7,7 +7,6 @@ const Loader = () => {
 
   return (
     <>
-      <Header />
       <div className="cards-container">
         {dummyCards.map((_, index) => (
           <Dummy key={index} />

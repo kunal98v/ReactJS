@@ -1,77 +1,24 @@
-import { useEffect, useState } from "react";
-import { Card } from "./components/Card";
 import { Header } from "./components/Header";
-import Loader from "./components/Loader";
+import Body from "./components/Body";
+import {Contact} from "./components/Contact";
+import {About} from "./components/About";
+import {Error} from "./components/Error";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
-  
-  const [restaurants, setRestaurants] = useState([]);
-  const [filterRestaurants, setFilterRestaurants] = useState([]);
-  const [input, setInput] = useState("");
 
-  useEffect(() => {
-    fetchApi();
-  }, []);
-
-  const fetchApi = async () => {
-    const res = await fetch(
-      "https://restaurant-backend-xp1e.onrender.com/api/restaurants"
-    );
-    const data = await res.json();
-
-    const response = data.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards;
-
-    setRestaurants(response);
-    setFilterRestaurants(response);
-  };
-
-  function highRatedRestaurants() {
-    let filterData = restaurants.filter((item) => {
-      return item?.card?.card?.info.avgRating > 4.5;
-    });
-    setFilterRestaurants(filterData);
-  }
-
-  function searchRestaurants() {
-    let searchRestaurants = restaurants.filter((item) => {
-      return item?.card?.card?.info.name
-        .toLowerCase()
-        .includes(input.toLowerCase());
-    });
-    setFilterRestaurants(searchRestaurants);
-  }
-
-  function reset() {
-    setFilterRestaurants(restaurants);
-  }
-
-  return restaurants.length === 0 ? (
-    <Loader />
-  ) : (
+  return (
     <>
-      <Header />
-      <button onClick={highRatedRestaurants}>High Rated Restaurants</button>
-      <button onClick={reset}>Reset</button>
-      <input
-        type="text"
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-        value={input}
-      ></input>
-      <button
-        onClick={() => {
-          searchRestaurants();
-        }}
-      >
-        Search
-      </button>
-      <div className="cards-container">
-        {filterRestaurants.map((item, key) => {
-          const data = item?.card?.card?.info;
-          return <Card key={key} data={data} />;
-        })}
-      </div>
+    <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path="/" element={<Body />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </BrowserRouter>
+
     </>
   );
 }
