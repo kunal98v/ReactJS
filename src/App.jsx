@@ -4,23 +4,26 @@ import { Header } from "./components/Header";
 import Loader from "./components/Loader";
 
 function App() {
+  
   const [restaurants, setRestaurants] = useState([]);
   const [filterRestaurants, setFilterRestaurants] = useState([]);
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    const fetchApi = async () => {
-      const res = await fetch(
-        "https://restaurant-backend-xp1e.onrender.com/api/restaurants"
-      );
-      const data = await res.json();
-      const response = data?.data?.cards?.slice(3);
-      setRestaurants(response);
-      setFilterRestaurants(response);
-    };
-
     fetchApi();
   }, []);
+
+  const fetchApi = async () => {
+    const res = await fetch(
+      "https://restaurant-backend-xp1e.onrender.com/api/restaurants"
+    );
+    const data = await res.json();
+
+    const response = data.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards;
+
+    setRestaurants(response);
+    setFilterRestaurants(response);
+  };
 
   function highRatedRestaurants() {
     let filterData = restaurants.filter((item) => {

@@ -3,17 +3,15 @@ import Dummy from "./Dummy";
 import { Header } from "./Header";
 
 const Loader = () => {
+  const dummyCards = Array.from({ length: 100 });
+
   return (
     <>
       <Header />
       <div className="cards-container">
-        <Dummy />
-        <Dummy />
-        <Dummy />
-        <Dummy />
-        <Dummy />
-        <Dummy />
-        <Dummy />
+        {dummyCards.map((_, index) => (
+          <Dummy key={index} />
+        ))}
       </div>
     </>
   );
