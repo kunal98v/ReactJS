@@ -3,6 +3,8 @@ import Body from "./components/Body";
 import { Contact } from "./components/Contact";
 import { About } from "./components/About";
 import { Error } from "./components/Error";
+import { Menu } from "./components/Menu";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,8 +14,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Body />} />
-          <Route path="/about/:name" element={<About />} />
+          <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/restaurant/:id" element={<Menu />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

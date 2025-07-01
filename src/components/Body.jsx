@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "./Card";
 import { Header } from "./Header";
 import Loader from "./Loader";
-
+import { Link } from "react-router-dom";
 function Body() {
   
   const [restaurants, setRestaurants] = useState([]);
@@ -67,8 +67,9 @@ function Body() {
       </button>
       <div className="cards-container">
         {filterRestaurants.map((item, key) => {
+          const id = item?.card?.card?.info?.id
           const data = item?.card?.card?.info;
-          return <Card key={key} data={data} />;
+          return <Link key={key} to = {`restaurant/${id}`} ><Card  data={data} /></Link>;
         })}
       </div>
     </>
