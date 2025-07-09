@@ -49,23 +49,23 @@ function Body() {
     <Loader />
   ) : (
     <>
-      <button onClick={highRatedRestaurants}>High Rated Restaurants</button>
-      <button onClick={reset}>Reset</button>
-      <input
+      <button className='bg-gray-500 text-white px-4 py-2 rounded' onClick={highRatedRestaurants}>High Rated Restaurants</button>
+      <button className='bg-blue-500 text-white px-4 py-2 rounded'onClick={reset}>Reset</button>
+      <input className="border border-gray-300 px-3 py-2 rounded"
         type="text"
         onChange={(e) => {
           setInput(e.target.value);
         }}
         value={input}
       ></input>
-      <button
+      <button className='bg-blue-500 text-white px-4 py-2 rounded'
         onClick={() => {
           searchRestaurants();
         }}
       >
         Search
       </button>
-      <div className="cards-container">
+      <div className="flex flex-wrap w-full m-auto">
         {filterRestaurants.map((item, key) => {
           const id = item?.card?.card?.info?.id
           const data = item?.card?.card?.info;
