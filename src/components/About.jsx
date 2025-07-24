@@ -1,12 +1,13 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-
-
+import React from "react";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 export const About = () => {
+  const user = useContext(UserContext);
 
-    const {name} = useParams();
-    console.log(name)
   return (
-    <div>About</div>
-  )
-}
+    <>
+      <div>About</div>
+      <h2>{user}</h2>
+    </>
+  );
+};

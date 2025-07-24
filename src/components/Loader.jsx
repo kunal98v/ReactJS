@@ -7,7 +7,7 @@ const Loader = () => {
 
   return (
     <>
-      <div className="cards-container">
+      <div className="flex flex-wrap">
         {dummyCards.map((_, index) => (
           <Dummy key={index} />
         ))}
